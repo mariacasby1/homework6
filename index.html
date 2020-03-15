@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+</head>
+
+<body>
+  <form>
+    <div class="form-row align-items-center">
+      <div class="col-auto">
+        <label class="sr-only" for="inlineFormInput">City</label>
+        <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="London">
+      </div>
+
+
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-2">Submit</button>
+      </div>
+    </div>
+  </form>
+
+  <div id="weather">
+
+  </div>
+  <script>
+
+
+    $(document).ready(function () {
+
+      var city;
+    var queryURLcurrent;
+      $('button').on('click', function () {
+        event.preventDefault();
+        city = $('#inlineFormInput').val();
+        console.log(city);
+        queryURLcurrent = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=45ef307ac4f3d3a4e4a5f9cc5b952514`
+        $.ajax({
+          url: queryURLcurrent,
+          method: "GET"
+        }).then(function (response1) {
+          console.log(response1);
+
+          $('#weather').text(response1.main.temp);
+        
+
+        });
+      });
+      //console.log(city);
+        // var city = "Reston";
+        
+
+
+    
+      var queryURL = 'https://api.openweathermap.org/data/2.5/forecast?q=Reston&appid=45ef307ac4f3d3a4e4a5f9cc5b952514'
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function (response) {
+        console.log(response);
+
+        // $('#weather').text(response);
+        //$('p').html(ingreds)
+        // $('img').attr('src', photo);    
+
+      });
+
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!--<script src="script.js"></script>-->
+</body>
+
+</html>
